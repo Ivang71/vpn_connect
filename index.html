@@ -112,16 +112,16 @@
         </li>
       </ul>
     </div>
-    <div id="errorMessage" class="error-message">Ошибка: параметр suffix отсутствует.</div>
+    <div id="errorMessage" class="error-message">Ошибка: параметр code отсутствует.</div>
     <script>
       const base = "vpn://AAAHTHjanVXbbqMwEH3PV0Q8BwQkoUkf0-5K0a62UqtdVSpR5RiHWCE2Oza5NOLf1zbkAiEXrXkxc84cju3xsGu11bAwZxJRRkBYj-0PE9Njd5hVWYpkoSUjXxTZG0Bbq1MlmthjLd0gCRLyU-nMaKxFdiHT4dBKeBzqjOL9EEvIiiQaCC0CwCG0CkLe2SdSNuUZi4QmfRyzT4RKMSokYYWU5z84rnq80OrUeSkHqVmeO3AH5yhwyTEvLQmOF6JBQxApKYtFbUVHQhalGpOQkSqcH1_L6eSwUp7J-5ZaNblKiPgvkytGNrL2rdOxaw4XySiKwHzX7Pew73h-1_E9z_H7_pmZ5hPo9bpXeZlQ5XrF3x0-j2I0Kq2igTv1vMDuBsPI7vmzBxt1sWv3A4TcabeHg8C96v8oOUv4uhDdyETYkMLGXlFBObtTgDAM21SaBC3DOCP7C3Bp5JfhSTPUkFFj5ue1I4Gg5dutCmJErjksCvcSp43r1pWIM6ByW_CUcmJeGrkleuPT5QEoBlHbTpkspPEc-JJc3H3tBFYEfiFN0gnr9dqJuW5DEsVLxJDSczBfXpFIs2lC8Q9Sruanv7CDLPk7hi8B8Th4elmMhn-i57Er3en223a02Hx_5ly-vg2u-ZqrOzEuS3TmBhi72A_QoN8js-BaXkojAu9FXlPp5DfbT8jUrNbfTSfX11S3cHVNm2AJiAnN-TTtSDNVBVgVYt6qziaFjhWRGcoS-XTjd6N4AgM1N0RTXmmM2u-nOBOeBjzHPCdhvwibn8A-POdC6qM3ULVj7SlMwS-qQoBGEWGj7W9hzOk-3spb_";
       const params = new URLSearchParams(location.search);
-      const suffix = params.get("suffix");
-      if (!suffix) {
+      const code = params.get("code");
+      if (!code) {
         document.getElementById("locationBlock").style.display = "none";
         document.getElementById("errorMessage").style.display = "block";
       } else {
-        document.getElementById("connectVpn").href = `${base}${suffix.slice(-7)}`;
+        document.getElementById("connectVpn").href = `${base}${code.slice(-7)}`;
       }
     </script>
   </body>
