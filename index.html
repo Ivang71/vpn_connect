@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VPN Connect</title>
+    <style>
+      :root {
+        --bg: #000000;
+        --text: #0f172a;
+        --btn: #0f766e;
+        --btn-hover: #14b8a6;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        font-family: "Avenir Next", "Segoe UI", "Trebuchet MS", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+      }
+
+      a.connect-vpn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: fit-content;
+        padding: 0.95rem 1.6rem;
+        border-radius: 10px;
+        border: 0;
+        text-decoration: none;
+        color: #ecfeff;
+        background: linear-gradient(140deg, #0f172a 0%, var(--btn) 100%);
+        font-size: 1.05rem;
+        font-weight: 600;
+        letter-spacing: 0.01em;
+        box-shadow:
+          inset 0 0 0 2px rgba(20, 184, 166, 0.35),
+          0 16px 30px rgba(0, 255, 245, 0.2);
+        transition: transform 0.18s ease,
+          box-shadow 0.2s ease,
+          background 0.2s ease,
+          filter 0.2s ease;
+      }
+
+      a.connect-vpn:hover,
+      a.connect-vpn:focus-visible {
+        background: var(--btn-hover);
+        transform: translateY(-1px);
+        box-shadow:
+          inset 0 0 0 2px rgba(20, 184, 166, 0.65),
+          0 20px 38px rgba(20, 184, 166, 0.35);
+        outline-offset: 2px;
+        outline: none;
+      }
+
+      a.connect-vpn:active {
+        transform: translateY(0);
+      }
+
+      .location-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        width: min(92vw, 560px);
+      }
+
+      .location-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+        padding: 1rem 1.2rem;
+        border-radius: 14px;
+        background: rgba(8, 24, 30, 0.72);
+        box-shadow: inset 0 0 0 1px rgba(20, 184, 166, 0.22),
+          0 8px 22px rgba(0, 255, 245, 0.2);
+      }
+
+      .location-text {
+        font-size: 1.02rem;
+        color: #e2e8f0;
+      }
+
+      .error-message {
+        display: none;
+        color: #fecaca;
+        text-align: center;
+        font-size: 1.02rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="locationBlock">
+      <ul class="location-list">
+        <li class="location-item">
+          <span class="location-text">Страна: <strong>🇱🇻 Латвия</strong></span>
+          <a id="connectVpn" class="connect-vpn" href="">
+            Подключить VPN
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div id="errorMessage" class="error-message">Ошибка: параметр suffix отсутствует.</div>
+    <script>
+      const base = "vpn://AAAHTHjanVXbbqMwEH3PV0Q8BwQkoUkf0-5K0a62UqtdVSpR5RiHWCE2Oza5NOLf1zbkAiEXrXkxc84cju3xsGu11bAwZxJRRkBYj-0PE9Njd5hVWYpkoSUjXxTZG0Bbq1MlmthjLd0gCRLyU-nMaKxFdiHT4dBKeBzqjOL9EEvIiiQaCC0CwCG0CkLe2SdSNuUZi4QmfRyzT4RKMSokYYWU5z84rnq80OrUeSkHqVmeO3AH5yhwyTEvLQmOF6JBQxApKYtFbUVHQhalGpOQkSqcH1_L6eSwUp7J-5ZaNblKiPgvkytGNrL2rdOxaw4XySiKwHzX7Pew73h-1_E9z_H7_pmZ5hPo9bpXeZlQ5XrF3x0-j2I0Kq2igTv1vMDuBsPI7vmzBxt1sWv3A4TcabeHg8C96v8oOUv4uhDdyETYkMLGXlFBObtTgDAM21SaBC3DOCP7C3Bp5JfhSTPUkFFj5ue1I4Gg5dutCmJErjksCvcSp43r1pWIM6ByW_CUcmJeGrkleuPT5QEoBlHbTpkspPEc-JJc3H3tBFYEfiFN0gnr9dqJuW5DEsVLxJDSczBfXpFIs2lC8Q9Sruanv7CDLPk7hi8B8Th4elmMhn-i57Er3en223a02Hx_5ly-vg2u-ZqrOzEuS3TmBhi72A_QoN8js-BaXkojAu9FXlPp5DfbT8jUrNbfTSfX11S3cHVNm2AJiAnN-TTtSDNVBVgVYt6qziaFjhWRGcoS-XTjd6N4AgM1N0RTXmmM2u-nOBOeBjzHPCdhvwibn8A-POdC6qM3ULVj7SlMwS-qQoBGEWGj7W9hzOk-3spb_";
+      const params = new URLSearchParams(location.search);
+      const suffix = params.get("suffix");
+      if (!suffix) {
+        document.getElementById("locationBlock").style.display = "none";
+        document.getElementById("errorMessage").style.display = "block";
+      } else {
+        document.getElementById("connectVpn").href = `${base}${suffix.slice(-7)}`;
+      }
+    </script>
+  </body>
+</html>
